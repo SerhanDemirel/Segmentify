@@ -17,12 +17,12 @@
               "answers": ["Black", "Red", "Green", "Blue"]
           },
           {
-              "step": 2,
-              "type": "price",
-              "subtype": "price",
-              "title": "Price question will be placed?",
-              "answers": ["€0-25", "€25-50", "€50-100", "€100+"]
-          }
+            "step": 2,
+            "type": "price",
+            "subtype": "price",
+            "title": "Fiyat aralığı seçiniz",
+            "answers": ["0-1000", "1000-2000", "2000+"]
+        }
       ]
   },
   {
@@ -36,12 +36,12 @@
               "answers": ["kadın", "erkek", "outlet", "çocuk"]
           },
           {
-              "step": 1,
-              "type": "color",
-              "subtype": "color",
-              "title": "Hangi renk?",
-              "answers": ["siyah", "bej", "beyaz", "mavi", "kırmızı", "yeşil"]
-          },
+            "step": 1,
+            "type": "color",
+            "subtype": "color",
+            "title": "What is your favourite colour?",
+            "answers": ["Black", "Red", "Green", "Blue"]
+        },
           {
               "step": 2,
               "type": "price",
