@@ -21,9 +21,32 @@ document.addEventListener('DOMContentLoaded', function() {
   };
 
   const categoryMap = {
-    "dresses":     "elbise",
-    "clothing":    "giyim",
-    "accessories": "aksesuar"
+    "dresses": [
+      "elbise",
+      "kadın > giyim > elbise",
+      "kadın > giyim > üst & t-shirt",
+      "erkek > giyim > üst & t-shirt",
+      "giyim",
+      "kadın > giyim > gece elbisesi"
+    ],
+    "clothing": [
+      "giyim",
+      "kadın > giyim > üst & t-shirt",
+      "erkek > giyim > üst & t-shirt",
+      "kadın > giyim > pantolon",
+      "erkek > giyim > pantolon",
+      "kadın > giyim > ceket",
+      "erkek > giyim > ceket"
+    ],
+    "accessories": [
+      "aksesuar",
+      "aksesuar > iç giyim & çorap",
+      "aksesuar > çanta",
+      "aksesuar > takı",
+      "aksesuar > şapka",
+      "aksesuar > atkı",
+      "aksesuar > eldiven"
+    ]
   };
 
   fetch('questions.json')
@@ -160,33 +183,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Ürünleri filtreleyen fonksiyon
   function filterProducts(products) {
-    // categoryMap ve colorMap ile İngilizce => Türkçe çevir
-    // Örn. "Blue" -> "mavi", "Accessories" -> "aksesuar"
-    // DİKKAT: toLowerCase() ile map key'ini buluyoruz
-    const mappedCategory = categoryMap[selectedCategory.toLowerCase()] || selectedCategory.toLowerCase();
+    const mappedCategories = categoryMap[selectedCategory.toLowerCase()] || [selectedCategory.toLowerCase()];
     const mappedColor = colorMap[selectedColor.toLowerCase()] || selectedColor.toLowerCase();
 
     console.log('Filtering Products with:', {
       selectedCategory,
       selectedColor,
       selectedPriceRange,
-      mappedCategory,
+      mappedCategories,
       mappedColor
     });
 
-    // Filtreleme
     const filtered = products.filter(product => {
-      // Kategori eşleşmesi: product.category veya product.labels içinde mappedCategory geçiyor mu?
-      // Örneğin product.category: ["outlet > kadın > tüm i̇ndirimli ürünler"]
-      // Sizde "aksesuar", "giyim" gibi kısmi kelime arayacaksınız.
-      const categoryMatch = product.category.some(catItem =>
-        catItem.toLowerCase().includes(mappedCategory)
+      // Kategori eşleşmesi: product.category veya product.labels içinde mappedCategories'den biri geçiyor mu?
+      const categoryMatch = mappedCategories.some(mappedCategory =>
+        product.category.some(catItem =>
+          catItem.toLowerCase().includes(mappedCategory)
+        )
       );
 
       // Renk eşleşmesi:
-      // Örneğin product.colors: ["mavi", "kırmızı"]
-      // mappedColor: "mavi"
-      // Eşleşmesi için tam karşılaştırma yapabiliriz
       const colorMatch = product.colors.some(c =>
         c.toLowerCase() === mappedColor
       );
@@ -228,16 +244,21 @@ document.addEventListener('DOMContentLoaded', function() {
     const sliderNext = document.getElementById('slider-next');
 
     let currentTranslateX = 0;
-    const itemWidth = 200; // Her ürün kutusunun genişliği (örnek)
+    const itemWidth = 220; // Her ürün kutusunun genişliği
+    const maxTranslateX = -(products.length - Math.floor(sliderWrapper.offsetWidth / itemWidth)) * itemWidth;
 
     sliderNext.addEventListener('click', () => {
-      currentTranslateX -= itemWidth;
-      sliderWrapper.style.transform = `translateX(${currentTranslateX}px)`;
+      if (currentTranslateX > maxTranslateX) {
+        currentTranslateX -= itemWidth;
+        sliderWrapper.style.transform = `translateX(${currentTranslateX}px)`;
+      }
     });
 
     sliderPrev.addEventListener('click', () => {
-      currentTranslateX += itemWidth;
-      sliderWrapper.style.transform = `translateX(${currentTranslateX}px)`;
+      if (currentTranslateX < 0) {
+        currentTranslateX += itemWidth;
+        sliderWrapper.style.transform = `translateX(${currentTranslateX}px)`;
+      }
     });
   }
 
