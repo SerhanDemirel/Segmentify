@@ -1,0 +1,106 @@
+[
+  {
+      "name": "kadın",
+      "steps": [
+          {
+              "step": 0,
+              "type": "question",
+              "subtype": "category",
+              "title": "Which category are you interested in?",
+              "answers": ["Dresses", "Clothing", "Accessories"]
+          },
+          {
+              "step": 1,
+              "type": "color",
+              "subtype": "color",
+              "title": "What is your favourite colour?",
+              "answers": ["Black", "Red", "Green", "Blue"]
+          },
+          {
+              "step": 2,
+              "type": "price",
+              "subtype": "price",
+              "title": "Price question will be placed?",
+              "answers": ["€0-25", "€25-50", "€50-100", "€100+"]
+          }
+      ]
+  },
+  {
+      "name": "erkek",
+      "steps": [
+          {
+              "step": 0,
+              "type": "question",
+              "subtype": "category",
+              "title": "Hangi kategoride ürün arıyorsunuz?",
+              "answers": ["kadın", "erkek", "outlet", "çocuk"]
+          },
+          {
+              "step": 1,
+              "type": "color",
+              "subtype": "color",
+              "title": "Hangi renk?",
+              "answers": ["siyah", "bej", "beyaz", "mavi", "kırmızı", "yeşil"]
+          },
+          {
+              "step": 2,
+              "type": "price",
+              "subtype": "price",
+              "title": "Fiyat aralığı seçiniz",
+              "answers": ["0-1000", "1000-2000", "2000+"]
+          }
+      ]
+  },
+  {
+      "name": "çocuk",
+      "steps": [
+          {
+              "step": 0,
+              "type": "question",
+              "subtype": "category",
+              "title": "Hangi kategoride ürün arıyorsunuz?",
+              "answers": ["kadın", "erkek", "outlet", "çocuk"]
+          },
+          {
+              "step": 0,
+              "type": "color",
+              "subtype": "color",
+              "title": "Hangi renk?",
+              "answers": ["siyah", "bej", "beyaz", "mavi", "kırmızı", "yeşil"]
+          },
+          {
+              "step": 1,
+              "type": "price",
+              "subtype": "price",
+              "title": "Fiyat aralığı seçiniz",
+              "answers": ["0-1000", "1000-2000", "2000+"]
+          }
+      ]
+  },
+  {
+    "name": "outlet",
+    "steps": [
+        {
+            "step": 0,
+            "type": "question",
+            "subtype": "category",
+            "title": "Hangi kategoride ürün arıyorsunuz?",
+            "answers": ["kadın", "erkek", "outlet", "çocuk"]
+        },
+        {
+            "step": 0,
+            "type": "color",
+            "subtype": "color",
+            "title": "Hangi renk?",
+            "answers": ["siyah", "bej", "beyaz", "mavi", "kırmızı", "yeşil"]
+        },
+        {
+            "step": 1,
+            "type": "price",
+            "subtype": "price",
+            "title": "Fiyat aralığı seçiniz",
+            "answers": ["0-1000", "1000-2000", "2000+"]
+        }
+    ]
+}
+]

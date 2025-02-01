@@ -1,0 +1,291 @@
+/* ==========
+   GENEL GÖVDE (BODY) 
+   ========== */
+   body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #fff; /* Arka plan beyaz */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  /* ==========
+     ANA KAPSAYICI (container)
+     ========== */
+  .container {
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    margin: auto;
+  }
+  
+  /* Adım sayacı (opsiyonel kullanabilirsiniz) */
+  #step-indicator {
+    font-size: 14px;
+    color: #999;
+    margin-bottom: 10px;
+  }
+  
+  /* ==========
+     SORU BÖLÜMÜ (question-section)
+     ========== */
+  #question-section {
+    margin-bottom: 20px;
+  }
+  
+  #question-section h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 30px;
+  }
+  
+  /* ==========
+     KATEGORİ SEÇİMİ vb. OVAL BUTONLAR
+     ========== */
+  /* Dinamik olarak script.js tarafında .category-options / .category-btn ekleyeceğinizi varsayalım */
+  .category-options,
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  
+  /* Oval, kenarlıklı / siyah metinli buton */
+  .category-btn {
+    display: inline-block;
+    padding: 14px 20px;
+    border-radius: 25px;     /* Oval köşe */
+    border: 2px solid #000; /* Siyah çerçeve */
+    background-color: #fff; 
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    text-align: center;
+  }
+  
+  /* Seçili durum (JavaScript ile eklenir) */
+  .category-btn.selected {
+    background-color: #000;
+    color: #fff;
+  }
+  
+  /* Hover efekti */
+  .category-btn:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* ==========
+     RENK SEÇİMLERİ (daireler)
+     ========== */
+  .color-options {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  
+  /* Daire şeklinde renk butonları */
+  .color-option {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent; /* Varsayılan çerçeve yok */
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+  
+  .color-option:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Örnek renk sınıfları */
+  .color-option.black { background-color: #000; }
+  .color-option.red   { background-color: #ff0000; }
+  .color-option.green { background-color: #00b300; }
+  .color-option.blue  { background-color: #0056ff; }
+  
+  /* Renk seçili olduğunda border vurgulamak isterseniz (JS ile eklenebilir) */
+  .color-option.selected {
+    border-color: #000; 
+  }
+  
+  /* ==========
+     RADIO TİPİ OPSİYONLAR (isteğe bağlı)
+     ========== */
+  .option-label {
+    display: block;
+    background-color: #fff;
+    padding: 14px;
+    border-radius: 25px;
+    border: 2px solid #000;
+    color: #000;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  /* Seçili durum */
+  .option-label.selected {
+    background-color: #000;
+    color: #fff;
+  }
+  
+  /* Hover */
+  .option-label:hover {
+    background-color: #000;
+    color: #fff;
+  }
+  
+  /* input[type="radio"] gizli olabilir */
+  .option-label input[type="radio"] {
+    display: none; 
+  }
+  
+  /* ==========
+     ÜRÜN BÖLÜMÜ
+     ========== */
+  #product-section {
+    margin-top: 20px;
+  }
+  
+  .product {
+    border: 1px solid #eee;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  .product img {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+  }
+  .product h3 {
+    font-size: 16px;
+    margin: 10px 0 5px 0;
+  }
+  .product p {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  /* ==========
+     NAVİGASYON BUTONLARI (Back - Next)
+     ========== */
+  .navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+  }
+  
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .navigation button {
+    border: 2px solid #000;
+    background-color: #fff;
+    color: #000;
+    padding: 10px 25px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    margin-bottom: 5px; /* Buton ile yazı arasındaki boşluk */
+  }
+  
+  .navigation button:hover {
+    background-color: #000;
+    color: #fff;
+  }
+  
+  .navigation button:disabled {
+    border-color: #ccc;
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+  }
+  
+  /* ==========
+     MOBİL UYUMLULUK
+     ========== */
+  @media (max-width: 480px) {
+    .container {
+      padding: 15px;
+    }
+  
+    #question-section h2 {
+      font-size: 18px;
+    }
+  
+    .navigation button {
+      padding: 8px 16px;
+      font-size: 14px;
+    }
+  }
+  
+
+.slider-container {
+    position: relative;
+    overflow: hidden; 
+    width: 100%;          /* Container genişliği */
+    margin: 0 auto;       /* Ortalamak isterseniz */
+  }
+  
+  .slider-wrapper {
+    display: flex;
+    gap: 10px;            /* Ürünler arasındaki boşluk */
+    transition: transform 0.3s ease-in-out;
+    /* Başlangıçta soldan başlasın */
+    transform: translateX(0);
+  }
+  
+  .slider-item {
+    min-width: 180px;     /* Ürün kutusu genişliği (ihtiyaca göre ayarlayabilirsiniz) */
+    flex-shrink: 0;       /* Daralmayı engelle */
+  }
+  
+  /* Slider butonları */
+  .slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 2px solid #000;
+    background-color: #fff;
+    color: #000;
+    padding: 5px 10px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+  }
+  
+  .slider-btn:hover {
+    background-color: #000;
+    color: #fff;
+  }
+  
+  .slider-btn.left {
+    left: 0;
+  }
+  .slider-btn.right {
+    right: 0;
+  }
+  
+  @media (max-width: 480px) {
+    .slider-item {
+      min-width: 140px; /* Mobilde daraltabilirsiniz */
+    }
+  }
