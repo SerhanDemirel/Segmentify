@@ -3,7 +3,10 @@ document.addEventListener('DOMContentLoaded', function() {
   const productSection = document.getElementById('product-section');
   const backBtn = document.getElementById('back-btn');
   const nextBtn = document.getElementById('next-btn');
+  const backBtnText = document.getElementById('back-btn-text');
+  const nextBtnText = document.getElementById('next-btn-text');
   const stepIndicator = document.getElementById('step-indicator');
+  const resetBtn = document.getElementById('reset-btn');
 
   let currentStep = 0;
   let selectedCategory = '';
@@ -195,23 +198,28 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     const filtered = products.filter(product => {
-      // Kategori eşleşmesi: product.category veya product.labels içinde mappedCategories'den biri geçiyor mu?
       const categoryMatch = mappedCategories.some(mappedCategory =>
         product.category.some(catItem =>
           catItem.toLowerCase().includes(mappedCategory)
         )
       );
 
-      // Renk eşleşmesi:
       const colorMatch = product.colors.some(c =>
         c.toLowerCase() === mappedColor
       );
 
-      // Fiyat eşleşmesi:
       const priceMatch = checkPriceRange(product.price, selectedPriceRange);
 
       return categoryMatch && colorMatch && priceMatch;
     });
+
+    // Soru kısmını ve butonları kaldır
+    questionSection.style.display = 'none';
+    backBtn.style.display = 'none';
+    nextBtn.style.display = 'none';
+    backBtnText.style.display = 'none';
+    nextBtnText.style.display = 'none';
+    resetBtn.style.display = 'block';
 
     if (filtered.length > 0) {
       renderProductsAsSlider(filtered);
