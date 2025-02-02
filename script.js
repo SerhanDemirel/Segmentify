@@ -30,7 +30,8 @@ document.addEventListener('DOMContentLoaded', function() {
       "kadın > giyim > üst & t-shirt",
       "erkek > giyim > üst & t-shirt",
       "giyim",
-      "kadın > giyim > gece elbisesi"
+      "kadın > giyim > gece elbisesi",
+      "çocuk",
     ],
     "clothing": [
       "giyim",
@@ -237,7 +238,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="slider-wrapper" id="slider-wrapper">
           ${products.map(p => `
             <div class="slider-item product">
-              <img src="${p.image}" alt="${p.name}" loading="lazy">
+              <img data-src="${p.image}" alt="${p.name}" class="lazy-image">
               <h3>${p.name}</h3>
               <p>${p.priceText}</p>
             </div>
@@ -267,6 +268,23 @@ document.addEventListener('DOMContentLoaded', function() {
         currentTranslateX += itemWidth;
         sliderWrapper.style.transform = `translateX(${currentTranslateX}px)`;
       }
+    });
+
+    // Lazy loading için Intersection Observer
+    const lazyImages = document.querySelectorAll('.lazy-image');
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.src = img.dataset.src;
+          img.classList.remove('lazy-image');
+          observer.unobserve(img);
+        }
+      });
+    });
+
+    lazyImages.forEach(img => {
+      imageObserver.observe(img);
     });
   }
 
