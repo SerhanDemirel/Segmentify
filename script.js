@@ -230,63 +230,98 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  // Slider şeklinde ürünleri bas
   function renderProductsAsSlider(products) {
+    // Tek slaytta 400 px genişlik, istersen 500-600 yaparak büyütebilirsin
+    const itemWidth = 400;
+  
+    // HTML Gövdesi
     productSection.innerHTML = `
       <div class="slider-container">
+        <!-- Sol ok -->
         <button class="slider-btn left" id="slider-prev">&#10094;</button>
+        
         <div class="slider-wrapper" id="slider-wrapper">
-          ${products.map(p => `
-            <div class="slider-item product">
-              <img data-src="${p.image}" alt="${p.name}" class="lazy-image">
-              <h3>${p.name}</h3>
-              <p>${p.priceText}</p>
-            </div>
+          ${
+            products.map(p => {
+              // varsa eski fiyat
+              const oldPriceHtml = p.oldPriceText 
+                ? `<span class="old-price">${p.oldPriceText}</span>` 
+                : '';
+  
+              return `
+                <div class="slider-item">
+                  <img src="${p.image}" alt="${p.name}" class="product-image" />
+                  
+                  <h3 class="product-title">${p.name}</h3>
+                  
+                  <div class="price-box">
+                    ${oldPriceHtml}
+                    <span class="new-price">${p.priceText}</span>
+                  </div>
+                  
+                  <button class="view-product-btn">VIEW PRODUCT</button>
+                </div>
+              `;
+            }).join('')
+          }
+        </div>
+  
+        <!-- Sağ ok -->
+        <button class="slider-btn right" id="slider-next">&#10095;</button>
+  
+        <!-- Alttaki gri çizgiler (her ürün için bir tane) -->
+        <div class="slider-indicators">
+          ${products.map((_, index) => `
+            <div class="slider-indicator ${index === 0 ? 'active' : ''}" data-index="${index}"></div>
           `).join('')}
         </div>
-        <button class="slider-btn right" id="slider-next">&#10095;</button>
       </div>
     `;
-
+  
+    // Seçimler
     const sliderWrapper = document.getElementById('slider-wrapper');
     const sliderPrev = document.getElementById('slider-prev');
     const sliderNext = document.getElementById('slider-next');
-
-    let currentTranslateX = 0;
-    const itemWidth = 220; // Her ürün kutusunun genişliği
-    const maxTranslateX = -(products.length - Math.floor(sliderWrapper.offsetWidth / itemWidth)) * itemWidth;
-
+    const indicators = document.querySelectorAll('.slider-indicator');
+  
+    // Mevcut gösterilen ürünün index’i
+    let currentIndex = 0;
+    const maxIndex = products.length - 1;
+  
+    // İleri-geri tıklama
     sliderNext.addEventListener('click', () => {
-      if (currentTranslateX > maxTranslateX) {
-        currentTranslateX -= itemWidth;
-        sliderWrapper.style.transform = `translateX(${currentTranslateX}px)`;
+      if (currentIndex < maxIndex) {
+        currentIndex++;
+        updateSlider();
       }
     });
-
+  
     sliderPrev.addEventListener('click', () => {
-      if (currentTranslateX < 0) {
-        currentTranslateX += itemWidth;
-        sliderWrapper.style.transform = `translateX(${currentTranslateX}px)`;
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateSlider();
       }
     });
-
-    // Lazy loading için Intersection Observer
-    const lazyImages = document.querySelectorAll('.lazy-image');
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const img = entry.target;
-          img.src = img.dataset.src;
-          img.classList.remove('lazy-image');
-          observer.unobserve(img);
+  
+    // Hem kaydırmayı hem de alt çizgi aktifliğini güncelleyen fonksiyon
+    function updateSlider() {
+      // Her bir slayt 400px (itemWidth) kabul edildiğinden
+      const translateX = -currentIndex * itemWidth;
+      sliderWrapper.style.transform = `translateX(${translateX}px)`;
+      
+      // Alt çizgiler (indikatorler) güncelle
+      indicators.forEach((ind, i) => {
+        if (i === currentIndex) {
+          ind.classList.add('active');
+        } else {
+          ind.classList.remove('active');
         }
       });
-    });
-
-    lazyImages.forEach(img => {
-      imageObserver.observe(img);
-    });
+    }
   }
+  
+  
+  
 
   // Seçili fiyat aralığına göre filtre fonksiyonu
   function checkPriceRange(productPrice, rangeValue) {

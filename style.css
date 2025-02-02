@@ -236,53 +236,128 @@
   }
   
 
+
+
+/* Slider kapsayıcısı - sabit bir genişlik verebilirsin */
 .slider-container {
   position: relative;
-  width: 100%;
-  overflow: hidden;
-  max-width: 800px;
+  /* Tek slayt genişliğiyle aynı veya biraz daha dar/büyük olabilir */
+  width: 400px; 
   margin: 0 auto;
+  overflow: hidden;
+  text-align: center; /* alt yazılar ortalansın */
 }
 
+/* İç wrapper, genişliğin kaydırma hareketiyle değiştiğini görebilirsin */
 .slider-wrapper {
-  display: flex;
+  display: flex;               /* Yatay sıralama */
   transition: transform 0.3s ease-in-out;
 }
 
+/* Tek ürün genişliği tam container kadar olsun */
 .slider-item {
-  min-width: 200px;
+  /* Container genişliği = 400px
+     Kaydırma yaparken "tek tek" gelsin diye min-width 400px */
+  min-width: 400px;
   box-sizing: border-box;
-  padding: 10px;
-  text-align: center;
+  padding: 20px 10px; 
 }
 
-.slider-item img {
-  width: 100%;
+.product-image {
+  width: 100%; 
   height: auto;
-  border-radius: 8px;
+  max-width: 300px;  /* ister 300 ister 350 px gibi belirleyebilirsin */
+  display: block;
+  margin: 0 auto 20px auto;
+  object-fit: contain; 
 }
 
+.product-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+
+/* Fiyat - eski-yeni */
+.price-box {
+  margin-bottom: 15px;
+}
+.old-price {
+  text-decoration: line-through;
+  color: #999;
+  margin-right: 8px;
+  font-size: 15px;
+}
+.new-price {
+  color: #ff0000;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* "View Product" butonu */
+.view-product-btn {
+  background-color: #000;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  border: none;
+  outline: none;
+}
+.view-product-btn:hover {
+  background-color: #333;
+}
+
+
+/* Ok butonları (left-right) */
 .slider-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
+  font-size: 2rem;
+  color: #333;
+  background: none;
   border: none;
-  padding: 10px;
   cursor: pointer;
-  border-radius: 50%;
-  z-index: 10;
+  z-index: 10; 
 }
-
+/* Sol ok */
 .slider-btn.left {
   left: 10px;
 }
-
+/* Sağ ok */
 .slider-btn.right {
   right: 10px;
 }
 
+/* Ok hover efekti (isteğe bağlı) */
 .slider-btn:hover {
-  background-color: rgba(0, 0, 0, 0.8);
+  color: #000; 
+}
+
+/***** Alttaki gri çizgiler (pagination benzeri) *****/
+.slider-indicators {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  gap: 4px; /* çizgiler arası boşluk */
+}
+
+.slider-indicator {
+  width: 40px;         /* ister 30-40px yap */
+  height: 3px;         /* kalınlığı */
+  background-color: #ddd;
+  border-radius: 2px;
+  transition: background-color 0.3s;
+  cursor: pointer;     /* tıklanabilir istersen */
+}
+
+/* Aktif slayt çizgisini siyahta göster */
+.slider-indicator.active {
+  background-color: #000;
 }
